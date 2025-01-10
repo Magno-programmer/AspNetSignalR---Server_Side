@@ -1,8 +1,8 @@
 using AspNetSignalIR.ClientListen;
 using System.Net;
 using System.Net.WebSockets;
-using static AspNetSignalIR.Connectors.ListenClientClass;
-using AspNetSignalIR.Models;
+using static AspNetSignalIR.Services.SignalR.ListenClientClass;
+using AspNetSignalIR.Controllers;
 
 Dictionary<Client, WebSocket> _clients = new();
 var builder = WebApplication.CreateBuilder(args);
@@ -39,6 +39,7 @@ app.Use(async (context, next) =>
 });
 
 app.MapHub<ImageHub>("/imageHub");
+
 app.MapControllers();
 
 app.Map(pattern: "/", requestDelegate: async context =>
